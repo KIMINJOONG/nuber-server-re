@@ -9,7 +9,12 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "cors": "^2.8.5",
+    "graphql-yoga": "^1.18.3",
+    "helmet": "^3.21.2",
+    "morgan": "^1.9.1"
+  },
   "devDependencies": {
     "@types/node": "^12.12.14",
     "nodemon": "^2.0.1",
