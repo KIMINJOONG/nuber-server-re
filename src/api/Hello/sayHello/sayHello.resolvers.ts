@@ -1,6 +1,7 @@
+import { sayHello } from "../../../types/graph";
 const resolvers = {
   Query: {
-    sayHello: () => "hey hello how are you"
+    sayHello: (): sayHello => "hey hello how are you"
   }
 };
 
