@@ -14,4 +14,9 @@ type User {
   updatedAt: String
   fullName: String
   isDriving: Boolean!
+  isRiding: Boolean!
+  isTaken: Boolean!
+  lastLng: Float
+  lastLat: Float
+  lastOrientation: Float
 }
