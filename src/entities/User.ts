@@ -3,19 +3,19 @@ import { IsEmail } from "class-validator";
 import {
   Entity,
   BaseEntity,
-  PrimaryColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
-  BeforeUpdate
+  BeforeUpdate,
+  PrimaryGeneratedColumn
 } from "typeorm";
 
 const BCRYPT_ROUNDS = 10;
 
 @Entity()
 class User extends BaseEntity {
-  @PrimaryColumn() id: number;
+  @PrimaryGeneratedColumn() id: number;
 
   @Column({ type: "text", unique: true })
   @IsEmail()
