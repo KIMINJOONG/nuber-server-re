@@ -29,6 +29,15 @@ const resolver: Resolvers = {
         };
       }
       try {
+        await User.create({
+          ...args,
+          profilePhoto: `http://graph.facebook.com/${fbId}/picture?type=square`
+        }).save();
+        return {
+          ok: true,
+          error: null,
+          token: "Comming soon"
+        };
       } catch (error) {
         return {
           ok: false,
