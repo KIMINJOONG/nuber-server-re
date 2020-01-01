@@ -10,21 +10,30 @@ const resolvers: Resolvers = {
       _,
       args: EmailSignInMutationArgs
     ): Promise<EmailSignInResponse> => {
-      const { email } = args;
+      const { email, password } = args;
       try {
         const user = await User.findOne({ email });
         if (!user) {
           return {
             ok: false,
-            error: "No User with that email",
+            error: "No User found with that email",
             token: null
           };
         }
-        return {
-          ok: true,
-          error: null,
-          token: "Comming soon"
-        };
+        const checkPassword = await user.comparePassword(password);
+        if (checkPassword) {
+          return {
+            ok: true,
+            error: null,
+            token: "Comming soon"
+          };
+        } else {
+          return {
+            ok: false,
+            error: "Wrong password",
+            token: null
+          };
+        }
       } catch (error) {
         return {
           ok: false,
