@@ -3,11 +3,12 @@ import {
   StartPhoneVerificationMutationArgs,
   StartPhoneVerificationResponse
 } from "../../../types/graph";
-import Verification from "src/entities/Verification";
+import Verification from "../../../entities/Verification";
+import { sendVerificationSMS } from "../../../utils/sendSMS";
 
 const resolvers: Resolvers = {
   Mutation: {
-    StartPhoneVerificatio: async (
+    StartPhoneVerification: async (
       _,
       args: StartPhoneVerificationMutationArgs
     ): Promise<StartPhoneVerificationResponse> => {
@@ -23,7 +24,11 @@ const resolvers: Resolvers = {
           payload: phoneNumber,
           target: "PHONE"
         }).save();
-
+        await sendVerificationSMS(newVerification.payload, newVerification.key);
+        return {
+          ok: true,
+          error: null
+        };
         // to do send SMS
       } catch (error) {
         return {
