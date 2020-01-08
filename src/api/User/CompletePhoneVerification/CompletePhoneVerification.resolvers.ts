@@ -1,10 +1,10 @@
-import { Resolvers } from "src/types/resolvers";
+import { Resolvers } from "../../../types/resolvers";
 import {
   CompletePhoneVerificationMutationArgs,
   CompletePhoneVerificationResponse
 } from "../../../types/graph";
-import Verification from "src/entities/Verification";
-import User from "src/entities/User";
+import Verification from "../../../entities/Verification";
+import User from "../../../entities/User";
 
 const resolvers: Resolvers = {
   Mutation: {
