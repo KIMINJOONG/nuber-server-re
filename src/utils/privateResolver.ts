@@ -1,4 +1,4 @@
-const authResolver = resolverFunction => async (
+const privateResolver = resolverFunction => async (
   parent,
   args,
   context,
@@ -11,4 +11,4 @@ const authResolver = resolverFunction => async (
   return resolved;
 };
 
-export default authResolver;
+export default privateResolver;
