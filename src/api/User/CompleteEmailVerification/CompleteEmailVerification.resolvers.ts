@@ -18,7 +18,7 @@ const resolvers: Resolvers = {
         const user: User = req.uesr;
         const { key } = args;
 
-        if (user.email) {
+        if (user.email && !user.verifiedEmail) {
           try {
             const verification = await Verification.findOne({
               key,
