@@ -5,7 +5,7 @@ import {
   RequestEmailVerificationResponse
 } from "../../../types/graph";
 import User from "../../../entities/User";
-import cleanNullArgs from "src/utils/cleanNullArgs";
+import cleanNullArgs from "../../../utils/cleanNullArgs";
 
 const resolvers: Resolvers = {
   Mutation: {
