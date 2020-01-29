@@ -1,21 +1,21 @@
 import bcrypt from "bcrypt";
 import { IsEmail } from "class-validator";
 import {
-  Entity,
   BaseEntity,
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
-  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
   ManyToOne,
-  OneToMany
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from "typeorm";
 import Chat from "./Chat";
 import Message from "./Message";
-import Ride from "./Ride";
 import Place from "./Place";
+import Ride from "./Ride";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -46,7 +46,7 @@ class User extends BaseEntity {
   phoneNumber: string;
 
   @Column({ type: "boolean", default: false })
-  verifiedPhonenNumber: boolean;
+  verifiedPhoneNumber: boolean;
 
   @Column({ type: "text" })
   profilePhoto: string;
@@ -100,16 +100,17 @@ class User extends BaseEntity {
     type => Place,
     place => place.user
   )
-  places: Place[] | any;
+  places: Place[];
 
   @CreateDateColumn() createdAt: string;
+
   @UpdateDateColumn() updatedAt: string;
 
   get fullName(): string {
-    return `${this.firstName}${this.lastName}`;
+    return `${this.firstName} ${this.lastName}`;
   }
 
-  public comparePassword(password: string = ""): Promise<boolean> {
+  public comparePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
   }
 
@@ -121,6 +122,7 @@ class User extends BaseEntity {
       this.password = hashedPassword;
     }
   }
+
   private hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, BCRYPT_ROUNDS);
   }
