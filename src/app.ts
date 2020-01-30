@@ -1,10 +1,11 @@
 import cors from "cors";
-import { Response, NextFunction } from "express";
+import { NextFunction, Response } from "express";
 import { GraphQLServer, PubSub } from "graphql-yoga";
 import helmet from "helmet";
 import logger from "morgan";
 import schema from "./schema";
 import decodeJWT from "./utils/decodeJWT";
+
 class App {
   public app: GraphQLServer;
   public pubSub: any;
@@ -14,8 +15,10 @@ class App {
     this.app = new GraphQLServer({
       schema,
       context: req => {
-        req: req.request;
-        pubSub: this.pubSub;
+        return {
+          req: req.request,
+          pubSub: this.pubSub
+        };
       }
     });
     this.middlewares();
@@ -33,7 +36,6 @@ class App {
     next: NextFunction
   ): Promise<void> => {
     const token = req.get("X-JWT");
-
     if (token) {
       const user = await decodeJWT(token);
       if (user) {
@@ -42,6 +44,7 @@ class App {
         req.user = undefined;
       }
     }
+    next();
   };
 }
 
