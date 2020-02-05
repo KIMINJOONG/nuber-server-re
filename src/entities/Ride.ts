@@ -1,13 +1,13 @@
 import {
   BaseEntity,
+  Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  Column,
-  ManyToOne
+  UpdateDateColumn
 } from "typeorm";
-import { rideStatus } from "src/types/types";
+import { rideStatus } from "../types/types";
 import User from "./User";
 
 @Entity()
@@ -57,14 +57,12 @@ class Ride extends BaseEntity {
   @ManyToOne(
     type => User,
     user => user.ridesAsDriver,
-    {
-      nullable: true
-    }
+    { nullable: true }
   )
   driver: User;
 
-  @CreateDateColumn()
-  createdAt: string;
+  @CreateDateColumn() createdAt: string;
+
   @UpdateDateColumn() updatedAt: string;
 }
 export default Ride;

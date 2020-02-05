@@ -2,9 +2,9 @@ import {
   BaseEntity,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  OneToMany
+  UpdateDateColumn
 } from "typeorm";
 
 import Message from "./Message";
@@ -26,8 +26,8 @@ class Chat extends BaseEntity {
   )
   participants: User[];
 
-  @CreateDateColumn()
-  createdAt: string;
+  @CreateDateColumn() createdAt: string;
+
   @UpdateDateColumn() updatedAt: string;
 }
 export default Chat;
