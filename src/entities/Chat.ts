@@ -24,7 +24,7 @@ class Chat extends BaseEntity {
   )
   messages: Message[];
 
-  @Column({ type: "number", nullable: true })
+  @Column({ type: "int", nullable: true })
   passengerId: number;
 
   @ManyToOne(
@@ -33,7 +33,7 @@ class Chat extends BaseEntity {
   )
   passenger: User;
 
-  @Column({ type: "number", nullable: true })
+  @Column({ type: "int", nullable: true })
   rideId: number;
 
   @OneToOne(
