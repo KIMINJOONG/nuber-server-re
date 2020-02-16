@@ -33,6 +33,9 @@ class Chat extends BaseEntity {
   )
   passenger: User;
 
+  @Column({ type: "number", nullable: true })
+  rideId: number;
+
   @OneToOne(
     type => Ride,
     ride => ride.chat
